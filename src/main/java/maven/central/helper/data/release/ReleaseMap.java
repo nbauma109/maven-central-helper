@@ -24,12 +24,8 @@ public class ReleaseMap {
         return releases;
     }
 
-    public void put(final String version, final Release date) {
-        releases.put(version, date);
-    }
-
-    public Release get(final String version) {
-        return releases.get(version);
+    public void add(final Release release) {
+        releases.put(release.toString(), release);
     }
 
     public Release latest() {

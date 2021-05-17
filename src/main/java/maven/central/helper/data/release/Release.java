@@ -20,22 +20,6 @@ public class Release {
         this(doc.getVersion(), LocalDate.ofEpochDay(TimeUnit.MILLISECONDS.toDays(doc.getTimestamp())));
     }
 
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
     @Override
     public String toString() {
         return String.join(" - ", date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)), version);

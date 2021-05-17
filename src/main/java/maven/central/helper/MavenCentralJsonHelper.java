@@ -43,7 +43,7 @@ import maven.central.helper.action.impl.SHA1SearchAction;
 
 public class MavenCentralJsonHelper {
 
-    private static final String MAVEN_SEARCH_URL = "https://search.maven.org";
+    private static final String MAVEN_SEARCH_URL = "http://search.maven.org";
 
     public static void main(final String[] args) throws Exception {
 

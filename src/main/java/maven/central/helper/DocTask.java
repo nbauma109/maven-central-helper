@@ -80,7 +80,7 @@ public class DocTask extends SwingWorker<List<Docs>, Docs> {
                 }
             }
             releasesPerGroupAndArtifact.computeIfAbsent(docId, ReleaseMap::new);
-            releasesPerGroupAndArtifact.get(docId).put(doc.getVersion(), new Release(doc));
+			releasesPerGroupAndArtifact.get(docId).add(new Release(doc));
         }
     }
 

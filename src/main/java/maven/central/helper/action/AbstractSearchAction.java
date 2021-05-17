@@ -24,7 +24,7 @@ public abstract class AbstractSearchAction extends AbstractAction {
 
     public final String getSearchURL(final int start, final int rows, final String queryParameters) {
         final StringBuilder query = new StringBuilder();
-        query.append("https://search.maven.org/solrsearch/select?q=");
+        query.append("http://search.maven.org/solrsearch/select?q=");
         query.append(queryParameters);
         query.append("&start=");
         query.append(start);
