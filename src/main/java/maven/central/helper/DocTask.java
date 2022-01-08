@@ -1,8 +1,17 @@
 package maven.central.helper;
 
+import org.jdesktop.swingx.JXTable;
+import org.jdesktop.swingx.decorator.HighlighterFactory;
+import org.oxbow.swingbits.list.CheckListRenderer;
+import org.oxbow.swingbits.table.filter.TableRowFilterSupport;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,11 +20,6 @@ import java.util.Map.Entry;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.SwingWorker;
-
-import org.jdesktop.swingx.JXTable;
-import org.jdesktop.swingx.decorator.HighlighterFactory;
-import org.oxbow.swingbits.list.CheckListRenderer;
-import org.oxbow.swingbits.table.filter.TableRowFilterSupport;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -34,12 +38,10 @@ public class DocTask extends SwingWorker<List<Docs>, Docs> {
     private static final String ARTIFACT = "Artifact";
     private static final String GROUP = "Group";
 
-    private final AbstractSearchAction searchAction;
     private final String queryParameters;
     private final IndexedMap<DocId, ReleaseMap> releasesPerGroupAndArtifact = new IndexedMap<>();
 
-    public DocTask(final AbstractSearchAction searchAction, final String queryParameters) {
-        this.searchAction = searchAction;
+    public DocTask(final String queryParameters) {
         this.queryParameters = queryParameters;
     }
 
@@ -50,8 +52,9 @@ public class DocTask extends SwingWorker<List<Docs>, Docs> {
         int numFound = 0;
         final List<Docs> allDocs = new ArrayList<>();
         do {
-            final String searchURL = searchAction.getSearchURL(rows * (start++), rows, queryParameters);
-            try (InputStream in = new URL(searchURL).openStream(); InputStreamReader isr = new InputStreamReader(in); Jsonb jsonb = JsonbBuilder.create()) {
+            final String searchURL = AbstractSearchAction.getSearchURL(rows * (start++), rows, queryParameters);
+            try (InputStream in = new URL(searchURL).openStream(); 
+                    InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8); Jsonb jsonb = JsonbBuilder.create()) {
                 final ResponseRoot responseRoot = jsonb.fromJson(isr, ResponseRoot.class);
                 final Response response = responseRoot.getResponse();
                 numFound = response.getNumFound();

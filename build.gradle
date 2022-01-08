@@ -8,8 +8,8 @@ repositories {
 
 dependencies {
     implementation 'org.bidib.com.github.markusbernhardt:proxy-vole:1.0.13'
-    implementation 'org.eclipse:yasson:2.0.2'
-    implementation 'org.glassfish:jakarta.json:2.0.0-RC1'
+    implementation 'org.eclipse:yasson:2.0.3'
+    implementation 'org.glassfish:jakarta.json:2.0.1'
     implementation 'org.swinglabs.swingx:swingx-all:1.6.5-1'
     implementation 'org.bidib.org.oxbow:swingbits:1.2.2'
 }

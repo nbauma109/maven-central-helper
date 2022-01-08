@@ -22,9 +22,9 @@ public abstract class AbstractSearchAction extends AbstractAction {
         this.textFields = textFields;
     }
 
-    public final String getSearchURL(final int start, final int rows, final String queryParameters) {
+    public final static String getSearchURL(final int start, final int rows, final String queryParameters) {
         final StringBuilder query = new StringBuilder();
-        query.append("http://search.maven.org/solrsearch/select?q=");
+        query.append("https://search.maven.org/solrsearch/select?q=");
         query.append(queryParameters);
         query.append("&start=");
         query.append(start);
@@ -38,7 +38,7 @@ public abstract class AbstractSearchAction extends AbstractAction {
         initPropertiesFromInput(textFields);
         final ProgressMonitor progressMonitor = new ProgressMonitor(null, "Loading results ...", "", 0, 100);
         final String queryParameters = buildQueryParameters();
-        final DocTask docTask = new DocTask(this, queryParameters);
+        final DocTask docTask = new DocTask(queryParameters);
         docTask.addPropertyChangeListener(evt -> {
             if ("progress".equals(evt.getPropertyName())) {
                 final Integer progress = (Integer) evt.getNewValue();
