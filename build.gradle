@@ -2,6 +2,9 @@ plugins {
     id 'java'
 }
 
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
 repositories {
     mavenCentral()
 }
@@ -13,3 +16,4 @@ dependencies {
     implementation 'org.swinglabs.swingx:swingx-all:1.6.5-1'
     implementation 'org.bidib.org.oxbow:swingbits:1.2.2'
 }
+
